@@ -52,7 +52,7 @@ def parse_line(s):
        "attrib" "value"
         to a dict key-value pair"""
     kv = eval('(' + ','.join(s.split()) + ',)')
-    return {'Name' : kv[0], 'Value' : kv[1]}
+    return dict(Name=kv[0], Value=kv[1])
 
 
 def levels():
@@ -64,8 +64,8 @@ def levels():
 
 def event_header(levelled_line):
     """an event, but not checked to make sure it's one we're interested in"""
-    level, line = levelled_line
-    return level == 0 and line.startswith('@')
+    level, text = levelled_line
+    return level == 0 and text.startswith('@')
 
 def chosen_event_header(levelled_line):
     """an event we're interested in"""
